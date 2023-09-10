@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import CounterScreen from "./CounterScreen";
 
 const HomeScreen = ({ navigation }) => {
 
@@ -7,9 +8,16 @@ const HomeScreen = ({ navigation }) => {
         <View>
             <Text style={[styles.textStyle, styles.background]}>Welcome to home screen</Text>
             <Button
-                title="Go to other screen"
+                title="Show friends"
                 onPress={() => navigation.navigate('ComponentScreen')}
             />
+            <Button 
+            style={styles.imageBtnStyle}
+            title="Images"
+            onPress={() => navigation.navigate('ImageScreen')}
+            />
+
+            <CounterScreen />
         </View>
     )
 }
@@ -22,6 +30,9 @@ const styles = StyleSheet.create({
     },
     background: {
         backgroundColor: 'yellow'
+    },
+    imageBtnStyle: {
+        marginTop: 20
     }
 })
 
