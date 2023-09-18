@@ -1,0 +1,2 @@
+Icons:
+https://github.com/expo/vector-icons

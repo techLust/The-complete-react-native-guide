@@ -1,28 +1,48 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import CounterScreen from "./CounterScreen";
+import SquareScreen from "./SquareScreen";
+import { Entypo } from '@expo/vector-icons';
+
 
 const HomeScreen = ({ navigation }) => {
 
     return (
-        <View>
-            <Text style={[styles.textStyle, styles.background]}>Welcome to home screen</Text>
+        <View style={styles.viewStyle}>
+            <Text style={[styles.textStyle, styles.background]}>
+                <Entypo name="home" size={24} color="black" />
+                Welcome to home screen</Text>
             <Button
                 title="Show friends"
                 onPress={() => navigation.navigate('ComponentScreen')}
             />
-            <Button 
-            style={styles.imageBtnStyle}
-            title="Images"
-            onPress={() => navigation.navigate('ImageScreen')}
+            <Button
+                style={styles.imageBtnStyle}
+                title="Images"
+                onPress={() => navigation.navigate('ImageScreen')}
             />
+            {/* <CounterScreen /> */}
+            <SquareScreen />
+            <Button
 
-            <CounterScreen />
+                title="Handle Input"
+                onPress={() => navigation.navigate('TextScreen')}
+            />
+            <Button
+
+                title="Call API"
+                onPress={() => navigation.navigate('APIcall')}
+            />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    viewStyle: {
+        alignItems: 'center', // by default layout is flex.
+        flexDirection: 'column', // By default
+        // ...StyleSheet.absoluteFillObject, // This style positions the child element absolutely
+
+    },
     textStyle: {
         fontSize: 30,
         color: 'red',

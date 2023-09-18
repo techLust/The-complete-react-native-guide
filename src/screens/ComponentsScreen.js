@@ -17,13 +17,6 @@ const ComponentScreen = ({navigation}) => {
     return (
         <View>
             <Text style={styles.textStyle}>Hey all! what's goin on.</Text>
-            <Button
-                title="Find girl friends"
-                onPress={() => {
-                    console.log('Girl friends button clicked')
-                    navigation.navigate('GirlFriends')
-                }}
-            />
             <FlatList
                 // horizontal // scroll horizontally by default true.
                 // showsHorizontalScrollIndicator={false}
