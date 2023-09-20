@@ -1,58 +1,58 @@
-import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import SquareScreen from "./SquareScreen";
-import { Entypo } from '@expo/vector-icons';
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import axios from "axios";
+
+const HomeScreen = () => {
+    const [product, setProduct] = useState([])
+
+    const fetctAllProduct = async () => {
+        try {
+            console.log('API called')
+            const { data: { data } } = await axios.get("http://192.168.62.93:4000/get/product");
+            setProduct(data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    console.log('PRODUCT FETCHED', product)
 
 
-const HomeScreen = ({ navigation }) => {
+    useEffect(() => {
+        fetctAllProduct()
+    }, [])
 
     return (
-        <View style={styles.viewStyle}>
-            <Text style={[styles.textStyle, styles.background]}>
-                <Entypo name="home" size={24} color="black" />
-                Welcome to home screen</Text>
-            <Button
-                title="Show friends"
-                onPress={() => navigation.navigate('ComponentScreen')}
-            />
-            <Button
-                style={styles.imageBtnStyle}
-                title="Images"
-                onPress={() => navigation.navigate('ImageScreen')}
-            />
-            {/* <CounterScreen /> */}
-            <SquareScreen />
-            <Button
-
-                title="Handle Input"
-                onPress={() => navigation.navigate('TextScreen')}
-            />
-            <Button
-
-                title="Call API"
-                onPress={() => navigation.navigate('APIcall')}
+        <View>
+            <Text style={styles.textStyle}>WELCOME TO e-Zone</Text>
+            <FlatList
+                // horizontal // scroll horizontally by default true.
+                // showsHorizontalScrollIndicator={false}
+                // showsVerticalScrollIndicator={false}
+                data={product}
+                renderItem={({ item, index }) => {
+                    return (
+                        <View>
+                            <View>
+                                <Image
+                                    style={{ width: 100, height: 100 }}
+                                    source={{ uri: `${item.url}` }}
+                                />
+                                <Text>{item.productName}</Text>
+                                <Text>{item.productPrice}</Text>
+                                <Text>Free delivery</Text>
+                            </View>
+                        </View>
+                    )
+                }}
             />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    viewStyle: {
-        alignItems: 'center', // by default layout is flex.
-        flexDirection: 'column', // By default
-        // ...StyleSheet.absoluteFillObject, // This style positions the child element absolutely
+    containerStyle: {
 
-    },
-    textStyle: {
-        fontSize: 30,
-        color: 'red',
-        padding: 5
-    },
-    background: {
-        backgroundColor: 'yellow'
-    },
-    imageBtnStyle: {
-        marginTop: 20
     }
 })
 
